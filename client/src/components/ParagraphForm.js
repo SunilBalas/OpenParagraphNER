@@ -1,14 +1,16 @@
 // ParagraphForm.js
 import React, { useState } from "react";
 
-const ParagraphForm = ({ setEntities }) => {
+const ParagraphForm = ({ setResponseData }) => {
     const [paragraph, setParagraph] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json', 
+            },
             body: JSON.stringify({ paragraph })
         };
 
@@ -18,8 +20,7 @@ const ParagraphForm = ({ setEntities }) => {
                 throw new Error('Failed to fetch data');
             }
             const data = await response.json();
-
-            setEntities(data);
+            setResponseData(data);
             } catch (error) {
         }
     };
@@ -28,17 +29,16 @@ const ParagraphForm = ({ setEntities }) => {
         <div className="container mt-5">
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-            <label htmlFor="paragraph">Paragraph</label>
             <textarea
                 className="form-control"
                 id="paragraph"
                 value={paragraph}
                 onChange={(e) => setParagraph(e.target.value)}
-                rows="5"
+                rows="10"
                 required
             />
             </div>
-            <button type="submit" className="btn btn-primary">Extract Information</button>
+            <button type="submit" className="btn btn-primary mt-3">Extract Information</button>
         </form>
         </div>
     );

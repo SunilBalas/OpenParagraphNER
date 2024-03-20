@@ -20,5 +20,6 @@ from django.urls import path
 from app.views import extract_paragraph_info
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path("api/extract_paragraph_info", extract_paragraph_info, name="extract_paragraph_info")
 ]
